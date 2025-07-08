@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_USER=salt
+      - DB_PASSWORD=salt
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=salt
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-gemini}
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=salt
+      - POSTGRES_PASSWORD=salt
+      - POSTGRES_DB=salt
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:
