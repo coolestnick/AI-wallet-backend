@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "name": "ai-wallet-backend",
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "agno_ui/crypto-research-ui/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "agno_ui/crypto-research-ui/$1"
+    }
+  ],
+  "env": {
+    "GEMINI_API_KEY": "AIzaSyAd9je8PlSKyD0IBV6vjQZP1Kgkwwxo1O8",
+    "OPENROUTER_KEY": "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",
+    "SOLSNIFFER_API_KEY": "wy0dq47njkcd75jyfwm0cbm8s3c4sa",
+    "DUNE_KEY": "LRqOx1thTRsEyHX4DBTyD9wLDD3lRolL",
+    "DUNE_SIM_API_KEY": "sim_zZx2X7iJ6SXP2LuhD3eIzcuUNQtoT1K4",
+    "FIRECRAWL_API_KEY": "fc-32a7a939fe414127a55256b3d1c4cf14",
+    "JWT_SECRET": "salt-wallet-super-secure-jwt-secret-2024",
+    "MONGODB_URI": "mongodb+srv://production:password@cluster.mongodb.net/salt_wallet?retryWrites=true&w=majority",
+    "DATABASE_NAME": "salt_wallet",
+    "APP_NAME": "Salt Wallet"
+  },
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 30
+    }
+  }
+}
+EOF < /dev/null
